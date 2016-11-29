@@ -19,3 +19,7 @@ class TestDelirium(unittest.TestCase):
 
         # He knows the deck has sixty cards in it
         self.assertEqual(gb_delirium.size(), 60)
+
+        # John then shuffles the deck
+        gb_delirium.shuffle_deck()
+

@@ -1,4 +1,4 @@
-from re import search
+from random import shuffle
 
 
 class Deck(object):
@@ -36,3 +36,6 @@ class Deck(object):
 
     def size(self):
         return len(self.cards)
+
+    def shuffle_deck(self):
+        shuffle(self.cards)
