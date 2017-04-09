@@ -20,6 +20,7 @@ class Deck(object):
         :param deck_list:
         :return:
         """
+        self.cards = []
         card_list = []
 
         with open(deck_list) as f:
@@ -39,3 +40,9 @@ class Deck(object):
 
     def shuffle_deck(self):
         shuffle(self.cards)
+
+    def draw(self):
+        return self.cards.pop()
+
+    def put_in_deck(self, card):
+        self.cards.append(card)

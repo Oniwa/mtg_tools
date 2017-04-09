@@ -84,8 +84,26 @@ class TestDeck(unittest.TestCase):
 
         deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
 
-        gb_delirium = Deck()
+        deck_load_test = Deck()
 
-        gb_delirium.load_text_list(deck_location)
+        deck_load_test.load_text_list(deck_location)
+        self.maxDiff = None
+        self.assertCountEqual(deck_load_test.cards, card_list)
 
-        self.assertCountEqual(gb_delirium.cards, card_list)
+    def test_draw(self):
+        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+
+        deck_draw_test = Deck()
+
+        deck_draw_test.load_text_list(deck_location)
+
+        deck_draw_test.draw()
+
+        self.assertEqual(len(deck_draw_test.cards), 59)
+
+    def test_put_in_deck(self):
+        test_deck = Deck()
+
+        test_deck.put_in_deck('Island')
+
+        self.assertIn('Island', test_deck.cards)

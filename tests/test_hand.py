@@ -25,7 +25,34 @@ class TestHand(unittest.TestCase):
 
         self.assertEqual(len(myhand.cards), 7)
 
+    def test_put_in_deck(self):
+        test_deck = Deck()
 
+        for _ in range(7):
+            test_deck.cards.append('Island')
 
+        test_deck.cards.append('Mountain')
 
+        myhand = Hand()
 
+        myhand.draw_starting_hand(test_deck)
+
+        myhand.put_in_deck('Mountain', test_deck)
+
+        self.assertNotIn('Mountain', myhand.cards)
+        self.assertIn('Mountain', test_deck.cards)
+
+    def test_get_card_from_deck(self):
+        test_deck = Deck()
+
+        for _ in range(7):
+            test_deck.cards.append('Island')
+
+        test_deck.cards.append('Mountain')
+
+        myhand = Hand()
+
+        myhand.get_card_from_deck('Mountain', test_deck)
+
+        self.assertIn('Mountain', myhand.cards)
+        self.assertNotIn('Mountain', test_deck.cards)
