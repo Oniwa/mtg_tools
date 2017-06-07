@@ -56,3 +56,21 @@ class TestHand(unittest.TestCase):
 
         self.assertIn('Mountain', myhand.cards)
         self.assertNotIn('Mountain', test_deck.cards)
+
+    def test_play(self):
+        test_deck = Deck()
+        battlefield = []
+
+        for _ in range(7):
+            test_deck.cards.append('Island')
+
+        test_deck.cards.append('Mountain')
+
+        myhand = Hand()
+
+        myhand.get_card_from_deck('Mountain', test_deck)
+
+        myhand.play('Mountain', battlefield)
+
+        self.assertIn('Mountain', battlefield)
+        self.assertNotIn('Mountain', test_deck.cards)

@@ -107,3 +107,18 @@ class TestDeck(unittest.TestCase):
         test_deck.put_in_deck('Island')
 
         self.assertIn('Island', test_deck.cards)
+
+    def test_put_cards_in_graveyard(self):
+        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+        graveyard= []
+
+        test_graveyard_deck = Deck()
+
+        test_graveyard_deck.load_text_list(deck_location)
+
+        test_graveyard_deck.put_cards_in_graveyard(4, graveyard)
+
+        self.assertEqual(56, test_graveyard_deck.size())
+        self.assertEqual(4, len(graveyard))
+
+

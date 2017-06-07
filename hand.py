@@ -20,3 +20,7 @@ class Hand(object):
         for _ in range(number):
             self.cards.append(deck.draw())
 
+    def play(self, card, battlefield):
+        self.cards.remove(card)
+        battlefield.append(card)
+

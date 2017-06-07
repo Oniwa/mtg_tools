@@ -46,3 +46,7 @@ class Deck(object):
 
     def put_in_deck(self, card):
         self.cards.append(card)
+
+    def put_cards_in_graveyard(self, number, graveyard):
+        for _ in range(number):
+            graveyard.append(self.draw())

@@ -41,10 +41,12 @@ class TestDelirium(unittest.TestCase):
 
         self.assertEqual(myhand.size(), 0)
 
-        # John gets a forest, swamp, and vessel in hand then draws 4 more cards
+        # John gets a forest, swamp, and vessel in hand,
+        # shuffles the deck, and then draws 4 more cards
         myhand.get_card_from_deck('Forest', gb_delirium)
         myhand.get_card_from_deck('Swamp', gb_delirium)
         myhand.get_card_from_deck('Vessel of Nascency', gb_delirium)
+        gb_delirium.shuffle_deck()
         myhand.draw(4, gb_delirium)
 
         self.assertEqual(myhand.size(), 7)
@@ -54,3 +56,29 @@ class TestDelirium(unittest.TestCase):
 
         # John plays the forest and the vessel on turn 1
         battlefield = []
+        myhand.play('Forest', battlefield)
+        myhand.play('Vessel of Nascency', battlefield)
+
+        self.assertEqual(myhand.size(), 5)
+
+        # On his next turn John draws a card, plays a swamp, and cracks the
+        # Vessel choosing to put all cards in graveyard
+        myhand.draw(1, gb_delirium)
+        myhand.play('Swamp', battlefield)
+
+        self.assertEqual(myhand.size(), 5)
+
+        graveyard = []
+        battlefield.remove('Vessel of Nascency')
+        graveyard.append('Vessel of Nascency')
+        gb_delirium.put_cards_in_graveyard(4, graveyard)
+
+        self.assertEqual(5, len(graveyard))
+
+        # check graveyard to see if delirium has been achieved
+
+        '''
+        NEW IDEA:
+        A program that takes two decks and gives a report on what
+        cards are the same in both and what cards are different
+        '''
