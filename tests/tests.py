@@ -2,6 +2,7 @@ import unittest
 
 from deck import Deck
 from hand import Hand
+from graveyard import Graveyard
 
 class TestDelirium(unittest.TestCase):
 
@@ -68,17 +69,13 @@ class TestDelirium(unittest.TestCase):
 
         self.assertEqual(myhand.size(), 5)
 
-        graveyard = []
+        mygraveyard = Graveyard()
         battlefield.remove('Vessel of Nascency')
-        graveyard.append('Vessel of Nascency')
-        gb_delirium.put_cards_in_graveyard(4, graveyard)
+        mygraveyard.cards.append('Vessel of Nascency')
+        gb_delirium.put_cards_in_graveyard(4, mygraveyard.cards)
 
-        self.assertEqual(5, len(graveyard))
+        self.assertEqual(5, len(mygraveyard.cards))
 
         # check graveyard to see if delirium has been achieved
+        delirium = mygraveyard.check_delirium()
 
-        '''
-        NEW IDEA:
-        A program that takes two decks and gives a report on what
-        cards are the same in both and what cards are different
-        '''

@@ -2,7 +2,7 @@ import unittest
 
 from deck import Deck
 
-from delirium import get_card
+from mtgsdk_wrapper import get_card
 
 class TestDeck(unittest.TestCase):
 
