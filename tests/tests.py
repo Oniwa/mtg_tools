@@ -77,5 +77,6 @@ class TestDelirium(unittest.TestCase):
         self.assertEqual(5, len(mygraveyard.cards))
 
         # check graveyard to see if delirium has been achieved
-        delirium = mygraveyard.check_delirium()
+        mygraveyard.check_delirium()
+        print(mygraveyard.delirium)
 
