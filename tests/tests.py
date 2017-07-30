@@ -3,10 +3,10 @@ import unittest
 from deck import Deck
 from hand import Hand
 from graveyard import Graveyard
+from mtgsdk_wrapper import get_card
+
 
 class TestDelirium(unittest.TestCase):
-
-
     def setUp(self):
         pass
 
@@ -44,34 +44,37 @@ class TestDelirium(unittest.TestCase):
 
         # John gets a forest, swamp, and vessel in hand,
         # shuffles the deck, and then draws 4 more cards
-        myhand.get_card_from_deck('Forest', gb_delirium)
-        myhand.get_card_from_deck('Swamp', gb_delirium)
-        myhand.get_card_from_deck('Vessel of Nascency', gb_delirium)
+        forest = get_card('Forest')
+        swamp = get_card('Swamp')
+        vessel = get_card('Vessel of Nascency')
+        myhand.get_card_from_deck(forest, gb_delirium)
+        myhand.get_card_from_deck(swamp, gb_delirium)
+        myhand.get_card_from_deck(vessel, gb_delirium)
         gb_delirium.shuffle_deck()
         myhand.draw(4, gb_delirium)
 
         self.assertEqual(myhand.size(), 7)
-        self.assertIn('Forest', myhand.cards)
-        self.assertIn('Swamp', myhand.cards)
-        self.assertIn('Vessel of Nascency', myhand.cards)
+        self.assertIn(forest, myhand.cards)
+        self.assertIn(forest, myhand.cards)
+        self.assertIn(vessel, myhand.cards)
 
         # John plays the forest and the vessel on turn 1
         battlefield = []
-        myhand.play('Forest', battlefield)
-        myhand.play('Vessel of Nascency', battlefield)
+        myhand.play(forest, battlefield)
+        myhand.play(vessel, battlefield)
 
         self.assertEqual(myhand.size(), 5)
 
         # On his next turn John draws a card, plays a swamp, and cracks the
         # Vessel choosing to put all cards in graveyard
         myhand.draw(1, gb_delirium)
-        myhand.play('Swamp', battlefield)
+        myhand.play(swamp, battlefield)
 
         self.assertEqual(myhand.size(), 5)
 
         mygraveyard = Graveyard()
-        battlefield.remove('Vessel of Nascency')
-        mygraveyard.cards.append('Vessel of Nascency')
+        battlefield.remove(vessel)
+        mygraveyard.cards.append(vessel)
         gb_delirium.put_cards_in_graveyard(4, mygraveyard.cards)
 
         self.assertEqual(5, len(mygraveyard.cards))
