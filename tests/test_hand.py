@@ -71,14 +71,14 @@ class TestHand(unittest.TestCase):
         self.myhand.play(self.tireless, battlefield)
 
         test_list = []
-        for item in self.myhand.cards:
+        for item in battlefield:
             test_list.append(item.name)
-        self.assertIn(self.mountain, battlefield)
+        self.assertIn(self.tireless.name, test_list)
 
         test_list = []
         for item in self.gb_delirium.cards:
             test_list.append(item.name)
-        self.assertNotIn(self.mountain, self.test_deck.cards)
+        self.assertNotIn(self.tireless.name, test_list)
 
         for item in self.myhand.cards:
             self.myhand.put_in_deck(item, self.gb_delirium)

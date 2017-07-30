@@ -24,6 +24,8 @@ class Hand(object):
             self.cards.append(deck.draw())
 
     def play(self, card, battlefield):
-        self.cards.remove(card)
-        battlefield.append(card)
-
+        for item in self.cards:
+            if item.name == card.name:
+                self.cards.remove(item)
+                battlefield.append(item)
+                break
