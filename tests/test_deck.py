@@ -1,20 +1,25 @@
 import unittest
 
-from deck import Deck
+from lib.deck import Deck
 
-from mtgsdk_wrapper import get_card
+from lib.mtgsdk_wrapper import get_card
 
-class TestDeck(unittest.TestCase):
 
+class TestDeckAPI(unittest.TestCase):
+    deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+
+    deck = Deck()
+
+    deck.load_text_list(deck_location)
 
     def setUp(self):
         pass
 
     def tearDown(self):
-        pass
+        self.deck.shuffle_deck()
 
     def test_get_card(self):
-        card = get_card('Noxious Gearhulk', 'kld')
+        card = get_card('Noxious Gearhulk')
 
         self.assertEqual(card.name, 'Noxious Gearhulk')
 
@@ -44,8 +49,8 @@ class TestDeck(unittest.TestCase):
             'Grasp of Darkness',
             'Grasp of Darkness',
             'Grasp of Darkness',
-            'Murder',
-            'Murder',
+            'Lightning Bolt',
+            'Lightning Bolt',
             'Noxious Gearhulk',
             "Pilgrim's Eye",
             "Pilgrim's Eye",
@@ -82,24 +87,47 @@ class TestDeck(unittest.TestCase):
             'Swamp',
         ]
 
-        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+        loaded_deck = []
 
-        deck_load_test = Deck()
+        for item in self.deck.cards:
+            loaded_deck.append(item.name)
 
-        deck_load_test.load_text_list(deck_location)
         self.maxDiff = None
-        self.assertCountEqual(deck_load_test.cards, card_list)
+        self.assertEqual(len(card_list), len(loaded_deck))
+        self.assertEqual(sorted(card_list), sorted(loaded_deck))
+
 
     def test_draw(self):
-        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+        card = self.deck.draw()
 
-        deck_draw_test = Deck()
+        self.assertEqual(len(self.deck.cards), 59)
 
-        deck_draw_test.load_text_list(deck_location)
+        self.deck.put_in_deck(card)
 
-        deck_draw_test.draw()
 
-        self.assertEqual(len(deck_draw_test.cards), 59)
+    def test_put_cards_in_graveyard(self):
+        graveyard= []
+
+        self.deck.put_cards_in_graveyard(4, graveyard)
+
+        self.assertEqual(56, self.deck.size())
+        self.assertEqual(4, len(graveyard))
+
+        for item in graveyard:
+            self.deck.put_in_deck(item)
+
+
+class TestDeckUtility(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_murder(self):
+        card = get_card('Murder')
+
+        self.assertNotEqual(card.name, 'Murder', msg='This test failing means they fixed gatherer!')
 
     def test_put_in_deck(self):
         test_deck = Deck()
@@ -107,18 +135,3 @@ class TestDeck(unittest.TestCase):
         test_deck.put_in_deck('Island')
 
         self.assertIn('Island', test_deck.cards)
-
-    def test_put_cards_in_graveyard(self):
-        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
-        graveyard= []
-
-        test_graveyard_deck = Deck()
-
-        test_graveyard_deck.load_text_list(deck_location)
-
-        test_graveyard_deck.put_cards_in_graveyard(4, graveyard)
-
-        self.assertEqual(56, test_graveyard_deck.size())
-        self.assertEqual(4, len(graveyard))
-
-

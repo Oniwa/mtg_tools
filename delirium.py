@@ -1,36 +1,49 @@
-from deck import Deck
-from hand import Hand
-from graveyard import Graveyard
 import time
+
+from lib.graveyard import Graveyard
+from lib.hand import Hand
+from lib.mtgsdk_wrapper import get_card
+from lib.deck import Deck
 
 start_time = time.time()
 
 gb_delirium = Deck()
 gb_delirium.load_text_list('D:\\code\\delirium\\tests\\test_data\\delirium.txt')
 myhand = Hand()
+mygraveyard = Graveyard()
+
+deck_size = len(gb_delirium.cards)
+
+forest = get_card('Forest')
+swamp = get_card('Swamp')
+vessel = get_card('Vessel of Nascency')
+
 
 count = 0
 times_delirious = 0
 
-while count < 100:
+while count < 10000:
     gb_delirium.shuffle_deck()
 
-    myhand.get_card_from_deck('Forest', gb_delirium)
-    myhand.get_card_from_deck('Swamp', gb_delirium)
-    myhand.get_card_from_deck('Vessel of Nascency', gb_delirium)
+    myhand.get_card_from_deck(forest, gb_delirium)
+    myhand.get_card_from_deck(swamp, gb_delirium)
+    myhand.get_card_from_deck(vessel, gb_delirium)
     gb_delirium.shuffle_deck()
     myhand.draw(4, gb_delirium)
 
     battlefield = []
-    myhand.play('Forest', battlefield)
-    myhand.play('Vessel of Nascency', battlefield)
+    myhand.play(forest, battlefield)
+    myhand.play(vessel, battlefield)
 
     myhand.draw(1, gb_delirium)
-    myhand.play('Swamp', battlefield)
+    myhand.play(swamp, battlefield)
 
-    mygraveyard = Graveyard()
-    battlefield.remove('Vessel of Nascency')
-    mygraveyard.cards.append('Vessel of Nascency')
+    for item in battlefield:
+        if item.name == vessel.name:
+            battlefield.remove(item)
+            mygraveyard.cards.append(item)
+            break
+
     gb_delirium.put_cards_in_graveyard(4, mygraveyard.cards)
 
     mygraveyard.check_delirium()
@@ -40,14 +53,22 @@ while count < 100:
     for card in mygraveyard.cards:
         gb_delirium.put_in_deck(card)
     mygraveyard.cards = []
+    mygraveyard.delirium = False
 
     for card in myhand.cards:
         gb_delirium.put_in_deck(card)
     myhand.cards = []
 
+    for card in battlefield:
+            gb_delirium.put_in_deck(card)
+    battlefield = []
+
     gb_delirium.shuffle_deck()
     count += 1
-    print(count)
+
+    if len(gb_delirium.cards) != deck_size:
+        print('Error resetting play state')
+        break
 
 percent = (times_delirious / count) * 100
 print('There is a {}% chance to hit delirium with this deck on turn 2'

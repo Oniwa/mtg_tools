@@ -1,5 +1,7 @@
 from random import shuffle
 
+from lib.mtgsdk_wrapper import get_card
+
 
 class Deck(object):
     cards = []
@@ -31,9 +33,10 @@ class Deck(object):
             item_list = item.split()
             item_number = int(item_list.pop(0))
             item_name = ' '.join(item_list)
+            card = get_card(item_name)
 
             for _ in range(item_number):
-                self.cards.append(item_name)
+                self.cards.append(card)
 
     def size(self):
         return len(self.cards)
