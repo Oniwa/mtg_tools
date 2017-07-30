@@ -12,14 +12,13 @@ class TestGraveyard(unittest.TestCase):
     ballista = get_card('Walking Ballista')
 
     def setUp(self):
-        pass
+        self.mygy = Graveyard()
 
     def tearDown(self):
-        pass
+        self.mygy.delirium = False
+        self.mygy.cards = []
 
     def test_check_delirium_true(self):
-        mygy = Graveyard()
-
         cards = [self.swamp,
                  self.prism,
                  self.amalgam,
@@ -27,15 +26,13 @@ class TestGraveyard(unittest.TestCase):
                  ]
 
         for item in cards:
-            mygy.cards.append(item)
+            self.mygy.cards.append(item)
 
-        mygy.check_delirium()
+        self.mygy.check_delirium()
 
-        self.assertEqual(mygy.delirium, True)
+        self.assertEqual(self.mygy.delirium, True)
 
     def test_check_delirium_false(self):
-        mygy = Graveyard()
-
         cards = [self.swamp,
                  self.swamp,
                  self.amalgam,
@@ -43,15 +40,13 @@ class TestGraveyard(unittest.TestCase):
                  ]
 
         for item in cards:
-            mygy.cards.append(item)
+            self.mygy.cards.append(item)
 
-        mygy.check_delirium()
+        self.mygy.check_delirium()
 
-        self.assertEqual(mygy.delirium, False)
+        self.assertEqual(self.mygy.delirium, False)
 
     def test_check_delirium_multiple_types_true(self):
-        mygy = Graveyard()
-
         cards = [self.swamp,
                  self.ballista,
                  self.swamp,
@@ -59,10 +54,8 @@ class TestGraveyard(unittest.TestCase):
                  ]
 
         for item in cards:
-            mygy.cards.append(item)
+            self.mygy.cards.append(item)
 
-        mygy.check_delirium()
+        self.mygy.check_delirium()
 
-        self.assertEqual(mygy.delirium, True)
-
-
+        self.assertEqual(self.mygy.delirium, True)

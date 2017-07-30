@@ -90,4 +90,3 @@ class TestDelirium(unittest.TestCase):
         # check graveyard to see if delirium has been achieved
         mygraveyard.check_delirium()
         print(mygraveyard.delirium)
-
