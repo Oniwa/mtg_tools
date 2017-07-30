@@ -65,12 +65,10 @@ while count < 10000:
 
     gb_delirium.shuffle_deck()
     count += 1
-    print(count)
 
     if len(gb_delirium.cards) != deck_size:
         print('Error resetting play state')
         break
-
 
 percent = (times_delirious / count) * 100
 print('There is a {}% chance to hit delirium with this deck on turn 2'
