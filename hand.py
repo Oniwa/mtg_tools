@@ -13,14 +13,19 @@ class Hand(object):
         deck.put_in_deck(card)
 
     def get_card_from_deck(self, card, deck):
-        deck.cards.remove(card)
-        self.cards.append(card)
+        for item in deck.cards:
+            if item.name == card.name:
+                deck.cards.remove(item)
+                self.cards.append(item)
+                break
 
     def draw(self, number, deck):
         for _ in range(number):
             self.cards.append(deck.draw())
 
     def play(self, card, battlefield):
-        self.cards.remove(card)
-        battlefield.append(card)
-
+        for item in self.cards:
+            if item.name == card.name:
+                self.cards.remove(item)
+                battlefield.append(item)
+                break

@@ -8,7 +8,7 @@ class Graveyard(object):
         types = []
 
         for item in self.cards:
-            temp_type = mtgsdk_wrapper.get_types(mtgsdk_wrapper.get_card(item, ''))
+            temp_type = mtgsdk_wrapper.get_types(item)
             for type in temp_type:
                 if type not in types:
                     types.append(type)

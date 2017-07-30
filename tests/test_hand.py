@@ -2,75 +2,84 @@ import unittest
 
 from deck import Deck
 from hand import Hand
+from mtgsdk_wrapper import get_card
+
 
 class TestHand(unittest.TestCase):
+    island = get_card('Island')
+    mountain = get_card('Mountain')
+    tireless = get_card('Tireless Tracker')
 
+    test_deck = Deck()
+    myhand = Hand()
+
+    deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+    gb_delirium = Deck()
+    gb_delirium.load_text_list(deck_location)
 
     def setUp(self):
-        pass
+        for _ in range(7):
+            self.test_deck.cards.append(self.island)
+
+        self.test_deck.cards.append(self.mountain)
 
     def tearDown(self):
-        pass
+        self.test_deck.cards = []
+        self.myhand.cards = []
 
     def test_draw_starting_hand(self):
-        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+        self.myhand.draw_starting_hand(self.gb_delirium)
 
-        gb_delirium = Deck()
+        self.assertEqual(len(self.myhand.cards), 7)
 
-        gb_delirium.load_text_list(deck_location)
+        for item in self.myhand.cards:
+            self.myhand.put_in_deck(item, self.gb_delirium)
 
-        myhand = Hand()
-
-        myhand.draw_starting_hand(gb_delirium)
-
-        self.assertEqual(len(myhand.cards), 7)
 
     def test_put_in_deck(self):
-        test_deck = Deck()
+        self.myhand.draw_starting_hand(self.test_deck)
 
-        for _ in range(7):
-            test_deck.cards.append('Island')
+        self.myhand.put_in_deck(self.mountain, self.test_deck)
 
-        test_deck.cards.append('Mountain')
+        self.assertNotIn(self.mountain, self.myhand.cards)
+        self.assertIn(self.mountain, self.test_deck.cards)
 
-        myhand = Hand()
-
-        myhand.draw_starting_hand(test_deck)
-
-        myhand.put_in_deck('Mountain', test_deck)
-
-        self.assertNotIn('Mountain', myhand.cards)
-        self.assertIn('Mountain', test_deck.cards)
 
     def test_get_card_from_deck(self):
-        test_deck = Deck()
+        self.myhand.get_card_from_deck(self.tireless, self.gb_delirium)
 
-        for _ in range(7):
-            test_deck.cards.append('Island')
+        test_list = []
+        for item in self.myhand.cards:
+            test_list.append(item.name)
 
-        test_deck.cards.append('Mountain')
+        self.assertIn(self.tireless.name, test_list)
 
-        myhand = Hand()
+        test_list = []
+        for item in self.gb_delirium.cards:
+            test_list.append(item.name)
+        self.assertNotIn(self.tireless.name, test_list)
 
-        myhand.get_card_from_deck('Mountain', test_deck)
+        for item in self.myhand.cards:
+            self.myhand.put_in_deck(item, self.gb_delirium)
 
-        self.assertIn('Mountain', myhand.cards)
-        self.assertNotIn('Mountain', test_deck.cards)
 
     def test_play(self):
-        test_deck = Deck()
         battlefield = []
 
-        for _ in range(7):
-            test_deck.cards.append('Island')
+        self.myhand.get_card_from_deck(self.tireless, self.gb_delirium)
 
-        test_deck.cards.append('Mountain')
+        self.myhand.play(self.tireless, battlefield)
 
-        myhand = Hand()
+        test_list = []
+        for item in battlefield:
+            test_list.append(item.name)
+        self.assertIn(self.tireless.name, test_list)
 
-        myhand.get_card_from_deck('Mountain', test_deck)
+        test_list = []
+        for item in self.gb_delirium.cards:
+            test_list.append(item.name)
+        self.assertNotIn(self.tireless.name, test_list)
 
-        myhand.play('Mountain', battlefield)
+        for item in self.myhand.cards:
+            self.myhand.put_in_deck(item, self.gb_delirium)
 
-        self.assertIn('Mountain', battlefield)
-        self.assertNotIn('Mountain', test_deck.cards)
