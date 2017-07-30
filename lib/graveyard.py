@@ -1,4 +1,5 @@
-import mtgsdk_wrapper
+from lib import mtgsdk_wrapper
+
 
 class Graveyard(object):
     cards = []

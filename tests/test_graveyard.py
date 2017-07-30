@@ -1,7 +1,8 @@
 import unittest
 
-from graveyard import Graveyard
-from mtgsdk_wrapper import get_card
+from lib.graveyard import Graveyard
+
+from lib.mtgsdk_wrapper import get_card
 
 
 class TestGraveyard(unittest.TestCase):
