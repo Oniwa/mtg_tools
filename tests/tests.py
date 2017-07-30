@@ -53,10 +53,13 @@ class TestDelirium(unittest.TestCase):
         gb_delirium.shuffle_deck()
         myhand.draw(4, gb_delirium)
 
+        test_list = []
+        for item in myhand.cards:
+            test_list.append(item.name)
         self.assertEqual(myhand.size(), 7)
-        self.assertIn(forest, myhand.cards)
-        self.assertIn(forest, myhand.cards)
-        self.assertIn(vessel, myhand.cards)
+        self.assertIn(forest.name, test_list)
+        self.assertIn(swamp.name, test_list)
+        self.assertIn(vessel.name, test_list)
 
         # John plays the forest and the vessel on turn 1
         battlefield = []
