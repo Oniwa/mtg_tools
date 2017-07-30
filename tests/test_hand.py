@@ -1,8 +1,9 @@
 import unittest
 
-from deck import Deck
-from hand import Hand
-from mtgsdk_wrapper import get_card
+from lib.deck import Deck
+from lib.hand import Hand
+
+from lib.mtgsdk_wrapper import get_card
 
 
 class TestHand(unittest.TestCase):

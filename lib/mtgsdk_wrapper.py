@@ -1,6 +1,4 @@
 from mtgsdk import Card
-from mtgsdk import Set
-from mtgsdk import Type
 
 
 def get_card(cardname):

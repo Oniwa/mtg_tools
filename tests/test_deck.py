@@ -1,8 +1,8 @@
 import unittest
 
-from deck import Deck
+from lib.deck import Deck
 
-from mtgsdk_wrapper import get_card
+from lib.mtgsdk_wrapper import get_card
 
 
 class TestDeckAPI(unittest.TestCase):

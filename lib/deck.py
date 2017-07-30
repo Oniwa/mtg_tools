@@ -1,5 +1,6 @@
 from random import shuffle
-from mtgsdk_wrapper import get_card
+
+from lib.mtgsdk_wrapper import get_card
 
 
 class Deck(object):

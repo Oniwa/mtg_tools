@@ -1,6 +1,6 @@
 import unittest
 
-from mtgsdk_wrapper import get_card, get_types
+from lib.mtgsdk_wrapper import get_card, get_types
 
 
 class TestMtgsdkWrapper(unittest.TestCase):

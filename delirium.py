@@ -1,7 +1,9 @@
-from deck import Deck
-from hand import Hand
-from graveyard import Graveyard
 import time
+
+from graveyard import Graveyard
+from hand import Hand
+
+from lib.deck import Deck
 
 start_time = time.time()
 
