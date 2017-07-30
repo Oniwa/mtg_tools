@@ -43,10 +43,26 @@ class TestHand(unittest.TestCase):
 
 
     def test_get_card_from_deck(self):
-        self.myhand.get_card_from_deck(self.mountain, self.test_deck)
+        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
 
-        self.assertIn(self.mountain, self.myhand.cards)
-        self.assertNotIn(self.mountain, self.test_deck.cards)
+        card_from_deck = Deck()
+
+        card_from_deck.load_text_list(deck_location)
+
+        tireless = get_card('Tireless Tracker')
+
+        self.myhand.get_card_from_deck(tireless, card_from_deck)
+
+        test_list = []
+        for item in self.myhand.cards:
+            test_list.append(item.name)
+
+        self.assertIn(tireless.name, test_list)
+
+        test_list = []
+        for item in card_from_deck.cards:
+            test_list.append(item.name)
+        self.assertNotIn(tireless.name, test_list)
 
 
     def test_play(self):
