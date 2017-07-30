@@ -76,8 +76,13 @@ class TestDelirium(unittest.TestCase):
         self.assertEqual(myhand.size(), 5)
 
         mygraveyard = Graveyard()
-        battlefield.remove(vessel)
-        mygraveyard.cards.append(vessel)
+
+        for item in battlefield:
+            if item.name == vessel.name:
+                battlefield.remove(item)
+                mygraveyard.cards.append(item)
+                break
+
         gb_delirium.put_cards_in_graveyard(4, mygraveyard.cards)
 
         self.assertEqual(5, len(mygraveyard.cards))
