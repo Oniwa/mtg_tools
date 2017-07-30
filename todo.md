@@ -4,3 +4,6 @@
     * Reset delirium flag on each run
     * Return land and swamp from battlefield to library
     * Check to ensure deck size is the same as imported list before doing another loop
+
+# Bugs:
+* Found a bug in gatherer.  When I search for Murder by name it does not return murder.  Changed Murder to Lightning Bolts for my test model because they are both instants.
