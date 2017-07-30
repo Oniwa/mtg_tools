@@ -8,8 +8,14 @@ from mtgsdk_wrapper import get_card
 class TestHand(unittest.TestCase):
     island = get_card('Island')
     mountain = get_card('Mountain')
+    tireless = get_card('Tireless Tracker')
+
     test_deck = Deck()
     myhand = Hand()
+
+    deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+    gb_delirium = Deck()
+    gb_delirium.load_text_list(deck_location)
 
     def setUp(self):
         for _ in range(7):
@@ -22,15 +28,12 @@ class TestHand(unittest.TestCase):
         self.myhand.cards = []
 
     def test_draw_starting_hand(self):
-        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
-
-        gb_delirium = Deck()
-
-        gb_delirium.load_text_list(deck_location)
-
-        self.myhand.draw_starting_hand(gb_delirium)
+        self.myhand.draw_starting_hand(self.gb_delirium)
 
         self.assertEqual(len(self.myhand.cards), 7)
+
+        for item in self.myhand.cards:
+            self.myhand.put_in_deck(item, self.gb_delirium)
 
 
     def test_put_in_deck(self):
@@ -43,36 +46,40 @@ class TestHand(unittest.TestCase):
 
 
     def test_get_card_from_deck(self):
-        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
-
-        card_from_deck = Deck()
-
-        card_from_deck.load_text_list(deck_location)
-
-        tireless = get_card('Tireless Tracker')
-
-        self.myhand.get_card_from_deck(tireless, card_from_deck)
+        self.myhand.get_card_from_deck(self.tireless, self.gb_delirium)
 
         test_list = []
         for item in self.myhand.cards:
             test_list.append(item.name)
 
-        self.assertIn(tireless.name, test_list)
+        self.assertIn(self.tireless.name, test_list)
 
         test_list = []
-        for item in card_from_deck.cards:
+        for item in self.gb_delirium.cards:
             test_list.append(item.name)
-        self.assertNotIn(tireless.name, test_list)
+        self.assertNotIn(self.tireless.name, test_list)
+
+        for item in self.myhand.cards:
+            self.myhand.put_in_deck(item, self.gb_delirium)
 
 
     def test_play(self):
         battlefield = []
 
-        self.myhand.get_card_from_deck(self.mountain, self.test_deck)
+        self.myhand.get_card_from_deck(self.tireless, self.gb_delirium)
 
-        self.myhand.play(self.mountain, battlefield)
+        self.myhand.play(self.tireless, battlefield)
 
+        test_list = []
+        for item in self.myhand.cards:
+            test_list.append(item.name)
         self.assertIn(self.mountain, battlefield)
+
+        test_list = []
+        for item in self.gb_delirium.cards:
+            test_list.append(item.name)
         self.assertNotIn(self.mountain, self.test_deck.cards)
 
+        for item in self.myhand.cards:
+            self.myhand.put_in_deck(item, self.gb_delirium)
 
