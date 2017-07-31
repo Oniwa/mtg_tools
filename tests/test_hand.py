@@ -23,6 +23,7 @@ class TestHand(unittest.TestCase):
             self.test_deck.cards.append(self.island)
 
         self.test_deck.cards.append(self.mountain)
+        self.myhand.cards = []
 
     def tearDown(self):
         self.test_deck.cards = []
