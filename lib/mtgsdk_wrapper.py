@@ -2,7 +2,7 @@ from mtgsdk import Card
 
 
 def get_card(cardname):
-    card = Card.where(name=cardname).all()
+    card = Card.where(name='"{}"'.format(cardname)).all()
 
     return card[0]
 
