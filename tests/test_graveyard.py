@@ -1,16 +1,31 @@
 import unittest
 
 from lib.graveyard import Graveyard
-
+from mtgsdk import Card
 from lib.mtgsdk_wrapper import get_card
 
 
 class TestGraveyard(unittest.TestCase):
-    swamp = get_card('Swamp')
-    prism = get_card('Prophetic Prism')
-    bolt = get_card('Lightning Bolt')
-    amalgam = get_card('Prized Amalgam')
-    ballista = get_card('Walking Ballista')
+    swamp = Card()
+    swamp.name = 'Swamp'
+    swamp.type = 'Basic Land \u2014 Swamp'
+
+    prism = Card()
+    prism.name = "Prophetic Prism"
+    prism.type = "Artifact"
+
+    bolt = Card()
+    bolt.name = 'Lightning Bolt'
+    bolt.type = 'Instant'
+
+    amalgam = Card()
+    amalgam.name = 'Prized Amalgam'
+    amalgam.type = 'Creature \u2014 Zombie'
+
+    ballista = Card()
+    ballista.name = 'Walking Ballista'
+    ballista.type = 'Artifact Creature \u2014 Construct'
+
 
     def setUp(self):
         self.mygy = Graveyard()

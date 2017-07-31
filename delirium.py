@@ -2,6 +2,7 @@ import time
 
 from lib.graveyard import Graveyard
 from lib.hand import Hand
+from mtgsdk import Card
 from lib.mtgsdk_wrapper import get_card
 from lib.deck import Deck
 
@@ -14,9 +15,14 @@ mygraveyard = Graveyard()
 
 deck_size = len(gb_delirium.cards)
 
-forest = get_card('Forest')
-swamp = get_card('Swamp')
-vessel = get_card('Vessel of Nascency')
+forest = Card()
+forest.name = 'Forest'
+
+swamp = Card()
+swamp.name = 'Swamp'
+
+vessel = Card()
+vessel.name = 'Vessel of Nascency'
 
 
 count = 0

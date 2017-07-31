@@ -2,14 +2,18 @@ import unittest
 
 from lib.deck import Deck
 from lib.hand import Hand
-
-from lib.mtgsdk_wrapper import get_card
+from mtgsdk import Card
 
 
 class TestHand(unittest.TestCase):
-    island = get_card('Island')
-    mountain = get_card('Mountain')
-    tireless = get_card('Tireless Tracker')
+    island = Card()
+    island.name = 'Island'
+
+    mountain = Card()
+    mountain.name = 'Mountain'
+
+    tireless = Card()
+    tireless.name = 'Tireless Tracker'
 
     test_deck = Deck()
     myhand = Hand()
