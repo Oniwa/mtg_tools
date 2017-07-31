@@ -19,14 +19,20 @@ def get_types(card):
              'Sorcery',
             ]
 
-    type = card.type
-    type = type.split()
+    card_type = card.type
+    card_type = card_type.split()
 
-    for item in type:
+    for item in card_type:
         if item in types:
             type_list.append(item)
 
     return type_list
+
+
+class CardMock(object):
+    def __init__(self, name, type):
+        self.name = name
+        self.type = type
 
 
 

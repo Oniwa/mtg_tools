@@ -2,14 +2,13 @@ import unittest
 
 from lib.deck import Deck
 from lib.hand import Hand
-
-from lib.mtgsdk_wrapper import get_card
+from lib.mtgsdk_wrapper import CardMock
 
 
 class TestHand(unittest.TestCase):
-    island = get_card('Island')
-    mountain = get_card('Mountain')
-    tireless = get_card('Tireless Tracker')
+    island = CardMock(name='Island', type='')
+    mountain = CardMock(name='Mountain', type='')
+    tireless = CardMock(name='Tireless Tracker', type='')
 
     test_deck = Deck()
     myhand = Hand()

@@ -2,7 +2,7 @@ import time
 
 from lib.graveyard import Graveyard
 from lib.hand import Hand
-from lib.mtgsdk_wrapper import get_card
+from lib.mtgsdk_wrapper import CardMock
 from lib.deck import Deck
 
 start_time = time.time()
@@ -14,10 +14,9 @@ mygraveyard = Graveyard()
 
 deck_size = len(gb_delirium.cards)
 
-forest = get_card('Forest')
-swamp = get_card('Swamp')
-vessel = get_card('Vessel of Nascency')
-
+forest = CardMock(name='Forest', type='')
+swamp = CardMock(name='Swamp', type='')
+vessel = CardMock(name='Vessel of Nascency', type='')
 
 count = 0
 times_delirious = 0
