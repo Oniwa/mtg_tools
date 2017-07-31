@@ -14,6 +14,8 @@ class TestGraveyard(unittest.TestCase):
 
     def setUp(self):
         self.mygy = Graveyard()
+        self.mygy.delirium = False
+        self.mygy.cards = []
 
     def tearDown(self):
         self.mygy.delirium = False
