@@ -127,7 +127,12 @@ class TestDeckUtility(unittest.TestCase):
     def test_murder(self):
         card = get_card('Murder')
 
-        self.assertNotEqual(card.name, 'Murder', msg='This test failing means they fixed gatherer!')
+        self.assertEqual(card.name, 'Murder')
+
+    def test_claim_to_fame(self):
+        card = get_card('claim')
+
+        self.assertEqual(card.name, 'Claim')
 
     def test_put_in_deck(self):
         test_deck = Deck()
