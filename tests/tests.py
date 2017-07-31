@@ -3,8 +3,7 @@ import unittest
 from lib.deck import Deck
 from lib.graveyard import Graveyard
 from lib.hand import Hand
-from mtgsdk import Card
-from lib.mtgsdk_wrapper import get_card
+from lib.mtgsdk_wrapper import CardMock
 
 
 class TestDelirium(unittest.TestCase):
@@ -45,17 +44,9 @@ class TestDelirium(unittest.TestCase):
 
         # John gets a forest, swamp, and vessel in hand,
         # shuffles the deck, and then draws 4 more cards
-        # forest = get_card('Forest')
-        # swamp = get_card('Swamp')
-        # vessel = get_card('Vessel of Nascency')
-        forest = Card()
-        forest.name = 'Forest'
-
-        swamp = Card()
-        swamp.name = 'Swamp'
-
-        vessel = Card()
-        vessel.name = 'Vessel of Nascency'
+        forest = CardMock(name='Forest', type='')
+        swamp = CardMock(name='Swamp', type='')
+        vessel = CardMock(name='Vessel of Nascency', type='')
 
         myhand.get_card_from_deck(forest, gb_delirium)
         myhand.get_card_from_deck(swamp, gb_delirium)

@@ -1,4 +1,5 @@
 # Todo:
+* Figure out how to use optional named keywords in class constructor
 * Figure out way to handle double cards
     * If you look up Claim then in names is Fame
 * ~~Figure out way to mock the Card class or create own that is compatible with the one from mtgsdk so that you don't have to do an API call all the time.~~ 2017/07/31 JB
@@ -11,7 +12,3 @@
     * ~~Return land and swamp from battlefield to library~~ 2017/07/30 JB
     * ~~Check to ensure deck size is the same as imported list before doing another loop~~ 2017/07/30 JB
 * ~~Add a requirements.txt file~~ 2017/07/30 JB
-
-# Bugs:
-* Found a bug in gatherer.  When I search for Murder by name it does not return murder.  Changed Murder to Lightning Bolts for my test model because they are both instants.
-    * To return the card Murder surround the text with double quotes ("")
