@@ -4,7 +4,8 @@ from lib.mtgsdk_wrapper import get_card
 
 
 class Deck(object):
-    cards = []
+    def __init__(self):
+        self.cards = []  # Cards in deck
 
     def load_text_list(self, deck_list):
         """

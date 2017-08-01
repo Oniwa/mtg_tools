@@ -1,9 +1,9 @@
 import unittest
 
-from lib.mtgsdk_wrapper import get_card, get_types
+from lib.mtgsdk_wrapper import get_card, get_types, CardMock
 
 
-class TestMtgsdkWrapper(unittest.TestCase):
+class TestMtgSdkWrapper(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -34,3 +34,34 @@ class TestMtgsdkWrapper(unittest.TestCase):
 
         self.assertEqual(len(test_list), len(card_types))
         self.assertEqual(sorted(test_list), sorted(card_types))
+
+
+class TestCardMock(unittest.TestCase):
+    def test_card_mock_name_only(self):
+        name = CardMock(name='Lightning Bolt')
+
+        self.assertEqual(name.name, 'Lightning Bolt')
+
+    def test_card_mock_type_only(self):
+        card_type = CardMock(type='Instant')
+
+        self.assertEqual(card_type.type, 'Instant')
+
+    def test_card_mock_name_and_type(self):
+        card_mock = CardMock(name='Lightning Bolt', type='Instant')
+
+        self.assertEqual(card_mock.name, 'Lightning Bolt')
+        self.assertEqual(card_mock.type, 'Instant')
+
+    def test_card_mock_undefined_arguments(self):
+        undefined_args = CardMock(cmc=3, text='Ach Hans Run!')
+
+        self.assertEqual(undefined_args.name, None)
+        self.assertEqual(undefined_args.type, None)
+
+    def test_card_mock_undefined_args_and_name_and_type(self):
+        card_mock = CardMock(name='Lava Spike', type='Sorcery \u2014 Arcane',
+                             cmc=1, text='Deal 3 damage to target player.')
+
+        self.assertEqual(card_mock.name, 'Lava Spike')
+        self.assertEqual(card_mock.type, 'Sorcery \u2014 Arcane')
