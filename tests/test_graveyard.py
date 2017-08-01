@@ -5,12 +5,14 @@ from lib.mtgsdk_wrapper import CardMock
 
 
 class TestGraveyard(unittest.TestCase):
-    swamp = CardMock(name='Swamp', type='Basic Land \u2014 Swamp')
-    prism = CardMock(name="Prophetic Prism", type="Artifact")
-    bolt = CardMock(name='Lightning Bolt', type='Instant')
-    amalgam = CardMock(name='Prized Amalgam', type='Creature \u2014 Zombie')
-    ballista = CardMock(name='Walking Ballista',
-                        type='Artifact Creature \u2014 Construct')
+    def __init__(self, methodName='runTest'):
+        self.swamp = CardMock(name='Swamp', type='Basic Land \u2014 Swamp')
+        self.prism = CardMock(name="Prophetic Prism", type="Artifact")
+        self.bolt = CardMock(name='Lightning Bolt', type='Instant')
+        self.amalgam = CardMock(name='Prized Amalgam', type='Creature \u2014 Zombie')
+        self.ballista = CardMock(name='Walking Ballista',
+                            type='Artifact Creature \u2014 Construct')
+        unittest.TestCase.__init__(self, methodName)
 
     def setUp(self):
         self.mygy = Graveyard()

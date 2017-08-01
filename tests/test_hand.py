@@ -6,16 +6,19 @@ from lib.mtgsdk_wrapper import CardMock
 
 
 class TestHand(unittest.TestCase):
-    island = CardMock(name='Island', type='')
-    mountain = CardMock(name='Mountain', type='')
-    tireless = CardMock(name='Tireless Tracker', type='')
+    def __init__(self, methodName='runTest'):
+        self.island = CardMock(name='Island', type='')
+        self.mountain = CardMock(name='Mountain', type='')
+        self.tireless = CardMock(name='Tireless Tracker', type='')
 
-    test_deck = Deck()
-    myhand = Hand()
+        self.test_deck = Deck()
+        self.myhand = Hand()
 
-    deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
-    gb_delirium = Deck()
-    gb_delirium.load_text_list(deck_location)
+        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+        self.gb_delirium = Deck()
+        self.gb_delirium.load_text_list(deck_location)
+
+        unittest.TestCase.__init__(self, methodName)
 
     def setUp(self):
         for _ in range(7):

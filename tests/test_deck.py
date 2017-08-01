@@ -6,11 +6,12 @@ from lib.mtgsdk_wrapper import get_card
 
 
 class TestDeckAPI(unittest.TestCase):
-    deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+    def __init__(self, methodName='runTest'):
+        deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
+        self.deck = Deck()
+        self.deck.load_text_list(deck_location)
 
-    deck = Deck()
-
-    deck.load_text_list(deck_location)
+        unittest.TestCase.__init__(self, methodName)
 
     def setUp(self):
         pass
