@@ -1,8 +1,8 @@
 from mtgsdk import Card
 
 
-def get_card(cardname):
-    card = Card.where(name='"{}"'.format(cardname)).all()
+def get_card(card_name):
+    card = Card.where(name='"{}"'.format(card_name)).all()
 
     return card[0]
 
@@ -38,6 +38,3 @@ class CardMock(object):
                 self.name = value
             elif key == 'type':
                 self.type = value
-
-
-

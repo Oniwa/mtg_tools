@@ -3,7 +3,7 @@ import unittest
 from lib.mtgsdk_wrapper import get_card, get_types, CardMock
 
 
-class TestMtgsdkWrapper(unittest.TestCase):
+class TestMtgSdkWrapper(unittest.TestCase):
 
     def setUp(self):
         pass

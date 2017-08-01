@@ -1,5 +1,6 @@
 class Hand(object):
-    cards = []
+    def __init__(self):
+        self.cards = []
 
     def draw_starting_hand(self, deck):
         for _ in range(7):

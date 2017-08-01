@@ -6,6 +6,9 @@ from lib.mtgsdk_wrapper import get_card
 
 
 class TestDeckAPI(unittest.TestCase):
+    # noinspection PyPep8Naming
+    # This warning has been suppressed because naming convention of
+    # methodName and runTest is required for unittest
     def __init__(self, methodName='runTest'):
         deck_location = 'D:\\code\\delirium\\tests\\test_data\\delirium.txt'
         self.deck = Deck()
@@ -97,7 +100,6 @@ class TestDeckAPI(unittest.TestCase):
         self.assertEqual(len(card_list), len(loaded_deck))
         self.assertEqual(sorted(card_list), sorted(loaded_deck))
 
-
     def test_draw(self):
         card = self.deck.draw()
 
@@ -105,9 +107,8 @@ class TestDeckAPI(unittest.TestCase):
 
         self.deck.put_in_deck(card)
 
-
     def test_put_cards_in_graveyard(self):
-        graveyard= []
+        graveyard = []
 
         self.deck.put_cards_in_graveyard(4, graveyard)
 
