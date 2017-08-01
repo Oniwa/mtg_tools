@@ -1,7 +1,7 @@
 # Todo:
-* Figure out how to use optional named keywords in class constructor
 * Figure out way to handle double cards
     * If you look up Claim then in names is Fame
+* ~~Figure out how to use optional named keywords in class constructor~~ 2017/08/01 JB
 * ~~Figure out way to mock the Card class or create own that is compatible with the one from mtgsdk so that you don't have to do an API call all the time.~~ 2017/07/31 JB
 * ~~Figure out why some tests fail when all tests are ran at once but when you isolate the tests to their own test class or unnittest they all pass~~ 2017/07/31 JB
     * ~~I think it has something to do with either namespace confilcts or with where the class objects are being created (IE myhand = Hand())~~ 2017/07/31 JB
