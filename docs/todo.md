@@ -1,4 +1,5 @@
 # Todo:
+* James requested to find out how often you will get a hand of two castable creatures, a discard outlet and 2 vengevines by turn 3 (with 2 lands)
 * Figure out way to handle double cards
     * If you look up Claim then in names is Fame
 * ~~Figure out how to use optional named keywords in class constructor~~ 2017/08/01 JB
