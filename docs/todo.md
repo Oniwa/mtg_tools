@@ -1,6 +1,7 @@
 # Todo:
 * Figure out way to handle double cards
     * If you look up Claim then in names is Fame
+* ~~James requested to find out how often you will get a hand of two castable creatures, a discard outlet and 2 vengevines by turn 3 (with 2 lands)~~ 2017/08/21 JB
 * ~~Figure out how to use optional named keywords in class constructor~~ 2017/08/01 JB
 * ~~Figure out way to mock the Card class or create own that is compatible with the one from mtgsdk so that you don't have to do an API call all the time.~~ 2017/07/31 JB
 * ~~Figure out why some tests fail when all tests are ran at once but when you isolate the tests to their own test class or unnittest they all pass~~ 2017/07/31 JB

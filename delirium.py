@@ -1,3 +1,11 @@
+"""
+This script will determine the likely hood of getting delerium from a
+vessel of nascency that is cracked on turn 2.  The assumption is that all
+cards from the vessel will go into your graveyard and that you do not put a
+card into your hand from vessel.  It also assumes that you start the game with
+a forest, swamp, and vessel in you opening draw.
+"""
+
 import time
 
 from lib.graveyard import Graveyard
